@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+	
+
+	
+	<!-- Security -->
+	<bean id="urlSecurityChecker" class="com.ibs.common.module.frameworkimpl.security.biz.impl.UrlSecurityCheckerImpl">
+		<property name="menuDao" ref="menuDao"></property>
+		<property name="permissionService" ref="permissionService"/>
+	</bean>
+	
+	<bean id="formSecurityChecker" class="com.ibs.common.module.frameworkimpl.security.biz.impl.FormSecurityCheckerImpl">
+		<property name="menuDao" ref="menuDao"></property>
+		<property name="permissionService" ref="permissionService"/>
+	</bean>
+	
+	<bean id="permissionService" class="com.ibs.common.module.frameworkimpl.security.service.impl.PermissionServiceImpl">
+		<property name="applicationName">
+			<value>${application.name}</value>
+		</property>
+		<property name="userDao" ref="userDao" />
+		<property name="roleDao" ref="roleDao" />
+		<property name="menuDao" ref="menuDao" />
+		<property name="applicationDao" ref="applicationDao" />
+	</bean>
+	
+	<bean id="mailService" class="com.ibs.common.module.frameworkimpl.mail.service.impl.MailServiceImpl">
+		<property name="mailMessageDao" ref="mailMessageDao" />
+	</bean>
+	
+		<!-- 默认的 Converter -->
+	<bean id="sgConverter" class="com.ibs.common.module.frameworkimpl.intergration.converter.JiBXConverter">
+	</bean>
+
+	<bean id="xsConverter" class="com.ibs.common.module.frameworkimpl.intergration.converter.XStreamConverter">
+	</bean>
+	
+    <!-- =================================================================== -->
+    <!-- Mail: Sender and Velocity configuration                             -->
+    <!-- =================================================================== -->
+    <bean id="mailEngine" class="com.ibs.common.module.frameworkimpl.service.impl.MailEngine">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="from" value="${mail.default.from}"/>
+    </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.host}"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- Uncomment if you need to authenticate with your SMTP Server -->
+        <property name="username" value="${mail.username}"/>
+        <property name="password" value="${mail.password}"/>
+        <property name="javaMailProperties">
+            <value>
+                mail.smtp.auth=true
+            </value>
+        </property>
+    </bean>
+    
+   	<bean id="importerAction" class="com.ibs.common.module.frameworkimpl.data.action.ImporterAction" scope="prototype">
+		<property name="importerBiz" ref="importerBiz" />
+	</bean>
+	
+	<bean id="importerBiz" class="com.ibs.common.module.frameworkimpl.data.biz.impl.ImporterBizImpl">
+		<property name="importInfoDao" ref="importInfoDao" />
+		<property name="importDataDao" ref="importDataDao" />
+		<property name="filePersistenceDao" ref="filePersistenceDao" />
+	</bean>
+	
+	<bean id="exporterExecutorManager" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="5" />
+		<property name="queueCapacity" value="25" />
+	</bean>
+	
+	<bean id="exporterExecutor" class="com.ibs.common.module.frameworkimpl.data.ExporterExecutor">
+		<property name="exporterExecutorManager" ref="exporterExecutorManager" />
+		<property name="exporterFactory" ref="exporterFactory" />
+		<property name="filePersistenceService" ref="filePersistenceService" />
+		<property name="exporterDirectory" value="${tmp.file.folder}" />
+		<property name="exporterModule" value="${application.name}" />
+		<!--<constructor-arg ref="exporterExecutorManager" />-->
+	</bean>
+	
+	<bean id="exporterFactory" class="com.ibs.common.module.frameworkimpl.data.ExporterFactory">
+		<property name="excelExporter" ref="excelExporter" />
+	</bean>
+	
+	<bean id="excelExporter" class="com.ibs.common.module.frameworkimpl.data.excel.ExcelExporter">
+		<property name="exportSize" value="${export.size.excel}"></property>
+	</bean>
+	
+	<bean id="excelImporter" class="com.ibs.common.module.frameworkimpl.data.excel.ExcelImporter">
+		<property name="importerBiz" ref="importerBiz" />
+		<property name="importerDirectory" value="${tmp.file.folder}" />
+	</bean>
+
+	<!-- 下载Action -->
+	<bean id="downloadAction" class="com.ibs.common.module.frameworkimpl.file.action.DownloadAction" scope="prototype">
+		<property name="filePersistenceService" ref="filePersistenceService" />
+	</bean>
+	
+		<!-- 缓存 -->
+	<!--
+		ttl: 缓存数据过期时间（30分钟）
+		sleepTime：缓存更新线程睡眠时间（5分钟）
+		maxSize：缓存保存数目上限
+		threshHold：缓存数据数目预警线
+		initialCapacity: 初始容量。该实现执行内部大小调整，以容纳这些元素。
+		loadFactor: 加载因子阈值，用来控制重新调整大小。在每 bin 中的平均元素数大于此阈值时，可能要重新调整大小。
+		concurrencyLevel:当前更新线程的估计数。该实现将执行内部大小调整，以尽量容纳这些线程。
+	-->
+	<bean id="userCache" class="com.ibs.common.module.frameworkimpl.cache.UserCacheProvider">
+		<property name="applicationName">
+			<value>${application.name}</value>
+		</property>
+		<property name="userDao" ref="userDao" />
+		<property name="roleDao" ref="roleDao" />
+		<property name="menuDao" ref="menuDao" />
+		<property name="applicationDao" ref="applicationDao" />
+	    <property name="permissionService" ref="permissionService"/>
+		<property name="cacheName">
+			<util:constant static-field="com.ibs.common.module.frameworkimpl.common.Constants.USER_CACHE"/>
+		</property>
+		<property name="ttl" value="30" /><!-- 暂时设置为5分钟，SIT稳定后改回30分钟 -->
+		<property name="sleepTime" value="10" />
+		<property name="maxSize" value="10000" />
+		<property name="threshHold" value="5000" />
+		<property name="initialCapacity" value="100" />
+		<property name="concurrencyLevel" value="100" />
+	</bean>
+	
+	<bean id="applicationCache" class="com.ibs.common.module.frameworkimpl.cache.ApplicationCacheProvider">
+		<property name="applicationDao" ref="applicationDao" />
+		<property name="cacheName">
+			<util:constant static-field="com.ibs.common.module.frameworkimpl.common.Constants.APPLICATION_CACHE"/>
+		</property>
+		<!-- 缓存数据过期时间（30分钟） -->
+		<property name="ttl" value="30" />
+		<!-- 缓存更新线程睡眠时间 -->
+		<property name="sleepTime" value="10" />
+		<property name="maxSize" value="10000" />
+		<property name="threshHold" value="5000" />
+		<property name="initialCapacity" value="100" />
+		<property name="concurrencyLevel" value="100" />
+	</bean>
+	
+	<bean id="urlResourceCache" class="com.ibs.common.module.frameworkimpl.cache.UrlResourceCacheProvider">
+		<property name="menuDao" ref="menuDao" />
+		<property name="cacheName">
+			<util:constant static-field="com.ibs.common.module.frameworkimpl.common.Constants.URL_RESOURCE_CACHE"/>
+		</property>
+		<property name="ttl" value="60" />
+	</bean>
+	
+	<bean id="buttonResourceCache" class="com.ibs.common.module.frameworkimpl.cache.ButtonResourceCacheProvider">
+		<property name="menuDao" ref="menuDao" />
+		<property name="cacheName">
+			<util:constant static-field="com.ibs.common.module.frameworkimpl.common.Constants.BUTTON_RESOURCE_CACHE"/>
+		</property>
+		<property name="ttl" value="60" />
+	</bean>
+	
+	<bean id="macCache" class="com.ibs.common.module.frameworkimpl.cache.MacCacheProvider">
+		<property name="macDao" ref="macDao" />
+		<property name="cacheName">
+			<util:constant static-field="com.ibs.common.module.frameworkimpl.common.Constants.MAC_CACHE"/>
+		</property>
+		<property name="ttl" value="1440" />
+	</bean>
+	
+	<bean id="propertiesCache" class="com.ibs.common.module.frameworkimpl.cache.PropertiesCacheProvider">
+		<property name="propertiesEntityDao" ref="propertiesEntityDao" />
+		<property name="cacheName">
+			<util:constant static-field="com.ibs.common.module.frameworkimpl.common.Constants.PROPERTY_CACHE"/>
+		</property>
+		<property name="ttl" value="1440" />
+	</bean>
+	
+	<bean id="filePersistenceService" class="com.ibs.common.module.frameworkimpl.file.service.impl.FilePersistenceServiceImpl">
+		<property name="root">
+			<value>${file.service.root}</value>
+		</property>
+		<property name="module">
+			<value>${application.name}</value>
+		</property>
+		<property name="filePersistenceDao" ref="filePersistenceDao"></property>
+	</bean>
+	
+	<bean id="logListener" class="com.ibs.common.module.frameworkimpl.log.LogListener">
+		<!-- 提前注入property会出错 -->
+		<!--<property name="logMetaData" ref="logMetaData" />-->
+	</bean>
+	
+	<bean id="propertiesService" class="com.ibs.common.module.frameworkimpl.config.service.impl.PropertiesServiceImpl">
+	</bean>
+	
+	<!-- Log -->		
+	<bean id="logAspect" class="com.ibs.common.module.frameworkimpl.log.LogAspect">
+		<property name="logMetaData" ref="logMetaData"/>
+		<property name="domainDao" ref="domainDao"/>
+	</bean>
+	
+		<!-- Global Biz Log Conf -->
+	<aop:config proxy-target-class="true">
+        <aop:aspect ref="logAspect" order="2">
+        	<aop:pointcut id="bizLog" expression="execution(* *..biz.impl.*.*(..))"/>
+        	<aop:around pointcut-ref="bizLog" method="doBiz"/>
+        </aop:aspect>
+    </aop:config>
+	
+</beans>

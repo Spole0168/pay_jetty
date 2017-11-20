@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project name="WebFramework" default="package-jar" basedir=".">
+	
+	<property name="build.home" value="${basedir}/../Build" />	
+	<property file="${build.home}/build.properties" />
+	<import file="${build.home}/build-common.xml" />
+	<property name="web.jar.name" value="ibs-core-webframework.jar" />
+
+	<target name="package-jar" depends="compile, jar-web" description="package the web framework jar">
+	</target>
+
+</project>
