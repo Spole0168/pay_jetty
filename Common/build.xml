@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project name="Common" default="package-jar" basedir=".">
+	
+	<property name="build.home" value="${basedir}/../Build" />	
+	<property file="${build.home}/build.properties" />
+	<import file="${build.home}/build-common.xml" />
+	<property name="web.jar.name" value="ibs-core-common.jar" />
+	
+	<target name="package-jar" depends="compile, jar-web" description="Package the common web jar">
+	</target>	
+	
+</project>

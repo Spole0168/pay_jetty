@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="etc/dev"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Library/share/spring.jar"/>
+	<classpathentry kind="lib" path="/Library/share/json-lib-2.3-jdk15.jar"/>
+	<classpathentry kind="lib" path="/Library/share/struts2-core-2.1.8.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="/Library/share/jackson-databind-2.0.2.jar"/>
+	<classpathentry kind="lib" path="/Library/share/hibernate3.jar"/>
+	<classpathentry kind="lib" path="/Library/share/xwork-core-2.1.6.jar"/>
+	<classpathentry kind="lib" path="/Library/share/ezmorph-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Library/share/jxl-2.6.10.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-dbcp-1.3.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-pool-1.5.5.jar"/>
+	<classpathentry kind="lib" path="/Library/share/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="/Library/share/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="/Library/share/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="/Library/share/asm.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-digester-2.0.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/freemarker-2.3.15.jar"/>
+	<classpathentry kind="lib" path="/Library/share/struts2-tiles-plugin-2.1.8.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="/Library/share/struts2-json-plugin-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/struts2-spring-plugin-2.1.8.jar"/>
+	<classpathentry kind="lib" path="/Library/share/tiles-core-2.2.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/tiles-jsp-2.2.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/tiles-template-2.2.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-logging-1.0.3.jar"/>
+	<classpathentry kind="lib" path="/Library/share/backport-util-concurrent.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="/Library/share/pinyin4j-2.5.0.jar"/>
+	<classpathentry kind="lib" path="/Library/mq/dhbcore.jar"/>
+	<classpathentry kind="lib" path="/Library/share/tiles-servlet-2.2.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/tiles-api-2.2.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/Library/share/aspectjweaver-1.6.6.jar"/>
+	<classpathentry kind="lib" path="/Library/share/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/Library/share/jms.jar"/>
+	<classpathentry kind="lib" path="/Library/share/mail-1.4.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/jibx-run.jar"/>
+	<classpathentry kind="lib" path="/Library/share/tiles-servlet-wildcard-2.2.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-codec.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/BasicDataModules"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CB_Customer"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/WebFramework"/>
+	<classpathentry kind="lib" path="/Library/share/xstream-1.4.7.jar"/>
+	<classpathentry kind="lib" path="/Library/drools/antlr-runtime-3.5.jar"/>
+	<classpathentry kind="lib" path="/Library/drools/drools-compiler-6.4.0.Final.jar"/>
+	<classpathentry kind="lib" path="/Library/drools/drools-core-6.4.0.Final.jar"/>
+	<classpathentry kind="lib" path="/Library/drools/drools-decisiontables-6.4.0.Final.jar"/>
+	<classpathentry kind="lib" path="/Library/drools/drools-templates-6.4.0.Final.jar"/>
+	<classpathentry kind="lib" path="/Library/drools/kie-api-6.4.0.Final.jar"/>
+	<classpathentry kind="lib" path="/Library/drools/kie-internal-6.4.0.Final.jar"/>
+	<classpathentry kind="lib" path="/Library/drools/poi-ooxml-3.13.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/servlet-api-3.0.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-server-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-servlet-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-util-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-webapp-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-http-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-io-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-security-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/share/slf4j-api-1.7.5.jar"/>
+	<classpathentry kind="lib" path="/Library/share/slf4j-log4j12-1.7.5.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-xml-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/jetty-continuation-8.1.21.v20160908.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/javax.servlet.jsp.jstl-1.2.0.v201105211821.jar"/>
+	<classpathentry kind="lib" path="/Library/share/jstl-1.1.2.jar"/>
+	<classpathentry kind="lib" path="/Library/share/standard-1.1.2.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/javax.el-2.2.0.v201108011116.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/org.apache.jasper.glassfish-2.2.2.v201112011158.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/com.sun.el-2.2.0.v201108011116.jar"/>
+	<classpathentry kind="lib" path="/Library/jetty/javax.servlet.jsp-2.2.0.v201112011158.jar"/>
+	<classpathentry kind="lib" path="/Library/share/quartz-1.8.3.jar" sourcepath="C:/Users/IBM_ADMIN/Downloads/quartz-1.8.3-sources"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

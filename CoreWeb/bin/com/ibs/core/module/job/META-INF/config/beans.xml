@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd"
+			 default-autowire="byName">
+	
+	<!-- xbh start -->
+	<bean id="schedulerSetAction"
+		class="com.ibs.core.module.job.action.SchedulerSetAction"
+		scope="prototype">
+		<property name="schedulerSetBiz" ref="schedulerSetBiz"></property>
+	</bean>
+	<bean id="schedulerSetBiz"
+		class="com.ibs.core.module.job.biz.impl.SchedulerSetBizImpl">
+		<property name="schedulerSettingDao" ref="schedulerSettingDao"></property>
+	</bean>
+	 
+	 <bean id="schedulerSettingLogAction" class="com.ibs.core.module.job.action.SchedulerSettingLogAction">
+	 	<property name="schedulerSettingLogBiz" ref="schedulerSettingLogBiz"></property>
+	 </bean>
+	 
+	 <bean id="schedulerSettingLogBiz" class="com.ibs.core.module.job.biz.impl.SchedulerLogBizImpl">
+	 	<property name="schedulerSettingLogDao" ref="scheduleJobDao"/> 
+	 </bean>
+	 
+	 <bean id="schedulerDao"
+		class="com.ibs.core.module.job.dao.impl.SchedulerSetDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+</beans>

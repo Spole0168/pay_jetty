@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+	default-autowire="byName">
+
+
+	<!-- Biz -->
+	<bean id="merchantBiz" class="com.ibs.core.module.customer.biz.impl.MerchantBizImpl"
+		scope="prototype">
+		<property name="merchantDao" ref="merchantDao" />
+		<property name="corMertBankAcntDao" ref="corMertBankAcntDao" />
+		<property name="accountService" ref="accountService" />
+		<property name="custDao" ref="custDao" />
+		<property name="custCompanyDao" ref="custCompanyDao" />
+
+		<property name="corMertBankAcntChgDao" ref="corMertBankAcntChgDao" />
+		<property name="merchantChgDao" ref="merchantChgDao" />
+	</bean>
+	<bean id="corMertBankAcntBiz"
+		class="com.ibs.core.module.customer.biz.impl.CorMertBankAcntBizImpl"
+		scope="prototype">
+		<property name="corMertBankAcntDao" ref="corMertBankAcntDao" />
+	</bean>
+	<!-- Biz -->
+	<bean id="corMertUserBiz"
+		class="com.ibs.core.module.customer.biz.impl.CorMertUserBizImpl"
+		scope="prototype">
+		<property name="corMertUserDao" ref="corMertUserDao" />
+		<property name="corMertUserLogDao" ref="corMertUserLogDao" />
+
+	</bean>
+	<bean id="merchantChgBiz"
+		class="com.ibs.core.module.customer.biz.impl.MerchantChgBizImpl"
+		scope="prototype">
+		<property name="merchantChgDao" ref="merchantChgDao" />
+		<property name="corMertBankAcntChgDao" ref="corMertBankAcntChgDao" />
+		<property name="merchantDao" ref="merchantDao" />
+		<property name="corMertBankAcntDao" ref="corMertBankAcntDao" />
+		<property name="merchantBiz" ref="merchantBiz" />
+	</bean>
+	<bean id="corMertBankAcntChgBiz"
+		class="com.ibs.core.module.customer.biz.impl.CorMertBankAcntChgBizImpl"
+		scope="prototype">
+		<property name="corMertBankAcntChgDao" ref="corMertBankAcntChgDao" />
+
+	</bean>
+	<!-- Dao -->
+	<!-- Dao -->
+	<bean id="corMertBankAcntChgDao"
+		class="com.ibs.core.module.customer.dao.impl.CorMertBankAcntChgDaoImpl"
+		scope="prototype">
+	</bean>
+	<bean id="merchantChgDao"
+		class="com.ibs.core.module.customer.dao.impl.MerchantChgDaoImpl"
+		scope="prototype">
+	</bean>
+	<bean id="merchantDao" class="com.ibs.core.module.customer.dao.impl.MerchantDaoImpl"
+		scope="prototype">
+	</bean>
+	<bean id="corMertBankAcntDao"
+		class="com.ibs.core.module.customer.dao.impl.CorMertBankAcntDaoImpl"
+		scope="prototype">
+	</bean>
+	<!-- Merchant management beans end -->
+
+	<!-- Cust management beans start -->
+	<!-- Dao -->
+	<bean id="custDao" class="com.ibs.core.module.customer.dao.impl.CustDaoImpl"
+		scope="prototype">
+	</bean>
+	<bean id="custBiz" class="com.ibs.core.module.customer.biz.impl.CustBizImpl"
+		scope="prototype">
+		<property name="custDao" ref="custDao" />
+	</bean>
+	<!-- Cust management beans end -->
+
+	<!-- Shangzhuzi 2016年12月12日15:51:47 Beans begin -->
+	<!-- Biz -->
+	<bean id="custCompanyBiz"
+		class="com.ibs.core.module.customer.biz.impl.CustCompanyBizImpl">
+	</bean>
+	<!-- Dao -->
+	<bean id="custCompanyDao"
+		class="com.ibs.core.module.customer.dao.impl.CustCompanyDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+
+	<!-- Dao -->
+	<bean id="incomeOrderDao"
+		class="com.ibs.core.module.customer.dao.impl.IncomeOrderDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<bean id="incomeOrderBiz"
+		class="com.ibs.core.module.customer.biz.impl.IncomeOrderBizImpl">
+	</bean>
+	<!-- Biz -->
+	<bean id="corMertRateBiz"
+		class="com.ibs.core.module.customer.biz.impl.CorMertRateBizImpl">
+	</bean>
+	
+	<bean id="custPersonalBiz"
+		class="com.ibs.core.module.customer.biz.impl.CustPersonalBizImpl">
+	</bean>
+	<!-- Dao -->
+	<bean id="corMertRateDao"
+		class="com.ibs.core.module.customer.dao.impl.CorMertRateDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<!-- Dao -->
+	<bean id="corCardbindInfoDao"
+		class="com.ibs.core.module.customer.dao.impl.CorCardbindInfoDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<!-- Dao -->
+	<bean id="corCardbindMertCustDao"
+		class="com.ibs.core.module.customer.dao.impl.CorCardbindMertCustDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<bean id="custPersonalDao"
+		class="com.ibs.core.module.customer.dao.impl.CustPersonalDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<bean id="corFuzzyCustDao"
+		class="com.ibs.core.module.customer.dao.impl.CorFuzzyCustDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<bean id="cardBindService"
+		class="com.ibs.core.module.customer.service.impl.CardBindServiceImpl">
+	</bean>
+
+	<!-- Shangzhuzi 2016年12月12日15:51:47 Beans end -->
+
+	<!-- CustBankAcnt management beans start -->
+	<!-- Dao -->
+	<bean id="custBankAcntDao"
+		class="com.ibs.core.module.customer.dao.impl.CustBankAcntDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<!-- CustBankAcnt management beans end -->
+	<!-- CorMertUser Shangzhuzi 2016年12月13日19:26:26 -->
+	<bean id="corMertUserDao"
+		class="com.ibs.core.module.customer.dao.impl.CorMertUserDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<!-- Services Beans Shangzhuzi 2016年12月13日13:26:44 begin -->
+	<bean id="merchantService"
+		class="com.ibs.core.module.customer.service.impl.MerchantServiceImpl">
+	</bean>
+
+	<!-- Services Beans Shangzhuzi 2016年12月13日13:26:44 end -->
+
+	<bean id="custService"
+		class="com.ibs.core.module.customer.service.impl.CustServiceImpl">
+	</bean>
+
+	<!-- Dao -->
+	<bean id="corMertUserLogDao"
+		class="com.ibs.core.module.customer.dao.impl.CorMertUserLogDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+</beans>

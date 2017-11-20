@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+	<!-- Merchant management jsp start -->
+	<definition name="merchantInfoList" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/customer/merchantInfoList.jsp" />
+	</definition>
+	<definition name="merchantInfo" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/customer/merchantInfo.jsp" />
+	</definition>
+	<!-- Merchant management jsp end -->
+	
+	<!-- custcompany management jsp start -->
+	<definition name="custCompanyList" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/customer/custCompanyList.jsp" />
+	</definition>
+	<definition name="custCompanyEdit" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/customer/custCompanyEdit.jsp" />
+	</definition>
+	<!-- Merchant management jsp end -->
+	<!-- corMertRate jsp start  Shangzhuzi 2016年12月12日16:01:21-->
+	<definition name="corMertRateList" extends="default">
+		<put-attribute name="contant" value="/WEB-INF/pages/customer/corMertRateList.jsp" />
+	</definition>
+	<!-- corMertRate jsp end Shangzhuzi 2016年12月12日16:01:21-->
+	<!-- incomeOrder jsp start  Shangzhuzi 2016年12月12日16:01:21-->
+	<definition name="custInOrderList" extends="default">
+		<put-attribute name="contant" value="/WEB-INF/pages/customer/custInOrderList.jsp" />
+	</definition>
+	<definition name="custInOrderEdit" extends="default">
+		<put-attribute name="contant" value="/WEB-INF/pages/customer/custInOrderEdit.jsp" />
+	</definition>
+	<!-- incomeOrder jsp end Shangzhuzi 2016年12月12日16:01:21-->
+	
+	<definition name="corMertUserList" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/customer/corMertUserList.jsp" />
+	</definition>
+	<definition name="custPersonalList" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/customer/custPersonalList.jsp" />
+	</definition>
+	
+</tiles-definitions>

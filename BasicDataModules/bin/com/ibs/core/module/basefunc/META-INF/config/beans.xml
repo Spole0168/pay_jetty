@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	default-autowire="byName">
+	
+	<bean id="auditDao"
+		class="com.ibs.core.module.basefunc.dao.impl.AuditDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<bean id="auditLogDao"
+		class="com.ibs.core.module.basefunc.dao.impl.AuditLogDaoImpl"
+		parent="baseEntityDao">
+	</bean>
+	<bean id="auditService" class="com.ibs.core.module.basefunc.service.impl.AuditServiceImpl" >
+		<property name="auditDao" ref="auditDao" ></property>
+		<property name="auditLogDao" ref="auditLogDao" ></property>
+	</bean>
+	
+	<bean id="cityDao" class="com.ibs.core.module.basefunc.dao.impl.CityDaoImpl"></bean>
+	<bean id="cityService" class="com.ibs.core.module.basefunc.service.impl.CityServiceImpl">
+		<property name="cityDao" ref="cityDao"></property>
+	</bean>
+	
+	<bean id="codeRuleDao" class="com.ibs.core.module.basefunc.dao.impl.CodeRuleDaoImpl"></bean>
+	<bean id="codeRuleService" class="com.ibs.core.module.basefunc.service.impl.CodeRuleServiceImpl">
+		<property name="codeRuleDao" ref="codeRuleDao"></property>
+	</bean>
+	
+	<bean id="emailService" class="com.ibs.core.module.basefunc.service.impl.EmailServiceImpl"></bean>
+	
+	<bean id="SMSService" class="com.ibs.core.module.basefunc.service.impl.SMSServiceImpl"></bean>
+</beans>

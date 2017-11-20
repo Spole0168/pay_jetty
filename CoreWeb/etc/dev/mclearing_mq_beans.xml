@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jms="http://www.springframework.org/schema/jms"	
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd"
+	default-autowire="byName">
+
+	<!-- MQ settings -->
+	
+	<!-- 出款到资金 -->
+	<bean id="payment2FundChanelMqSender" class="com.ibs.common.module.mq.sender.impl.MQSenderImpl">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="destination" value="${mq.queue.payment.outorder.request}" />
+	</bean>
+<!--出款订单监听资金渠道报文  -->
+	<bean id="corOutPaymentOnFundChannelListener" class="com.ibs.core.module.mclearing.listener.CorOutPaymentOnFundChannelListener">
+		<property name="payment2FundChanelMqSender" ref="payment2FundChanelMqSender"></property>
+		<property name="corOutOrderPaymentService" ref="corOutOrderPaymentService"></property>
+	</bean>
+
+	<bean id="mqConnectionFactory" class="com.ibm.mq.jms.MQQueueConnectionFactory">
+		<property name="hostName" value="${mq.hostName}" />
+		<property name="port" value="${mq.port}" />
+		<property name="queueManager" value="${mq.queueManager}" />
+		<property name="transportType" value="1" />
+		<property name="CCSID" value="${mq.CCSID}" />
+		<property name="channel" value="${mq.channel}" />
+	</bean>
+
+	<bean id="jmsConnectionFactory"
+		class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter">
+		<property name="targetConnectionFactory" ref="mqConnectionFactory" />
+		<property name="username" value="${mq.username}" />
+		<property name="password" value="${mq.password}" />
+	</bean>
+
+	<bean id="jmsTransactionManager"
+		class="org.springframework.jms.connection.JmsTransactionManager">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="pubSubDomain" value="false" />
+	</bean>
+<!-- 监听队列配置 -->
+	<jms:listener-container connection-factory="jmsConnectionFactory"
+		transaction-manager="jmsTransactionManager">
+		<jms:listener destination="${mq.queue.payment.outorder.response}" ref="corOutPaymentOnFundChannelListener" method="onMessage"/> 
+	</jms:listener-container>
+	
+</beans>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Merchant management action start -->
+	<package name="merchantManagement" namespace="/merchantManagement"
+		extends="web-default">
+		<action name="merchantInfoList" class="merchantManagementAction"
+			method="list">
+			<result name="success" type="tiles">merchantInfoList</result>
+		</action>
+		<action name="merchantSearch" class="merchantManagementAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+		<action name="merchantInfoAdd" class="merchantManagementAction"
+			method="create">
+			<result name="success">/WEB-INF/pages/customer/merchantEdit.jsp
+			</result>
+		</action>
+		<action name="merchantInfoUpdate" class="merchantManagementAction"
+			method="modify">
+			<result name="success">/WEB-INF/pages/customer/merchantEdit.jsp
+			</result>
+		</action>
+		<action name="saveOrUpdateMerchant" class="merchantManagementAction"
+			method="saveOrUpdate">	
+<!-- 			<result name="ajax" type="json"> -->
+<!-- 				<param name="include">map</param> -->
+<!-- 			</result> -->
+	<result name="success" type="tiles">merchantInfoList</result>
+<!-- 			<result name="success" type="redirect">merchantInfoList.action</result> -->
+		</action>
+		<action name="findCustName" class="merchantManagementAction"
+			method="findCustName">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="getProvince" class="merchantManagementAction"
+			method="getProvince">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="getCity" class="merchantManagementAction" method="getCity">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="getBankName" class="merchantManagementAction"
+			method="getBankName">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+
+		<action name="getBankBranchName" class="merchantManagementAction"
+			method="getBankBranchName">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="getCategoryInfo" class="merchantManagementAction"
+			method="getCategoryInfo">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="merchantActiveAccount" class="merchantManagementAction"
+			method="merchantActiveAccount">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		
+		<action name="mertIscheck" class="merchantManagementAction"
+			method="mertIscheck">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="applyChange" class="merchantManagementAction"
+			method="applyChange">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+
+	</package>
+	<!-- Merchant management action end -->
+
+	<!-- custcompany management action start -->
+	<package name="custCompany" namespace="/custCompany" extends="web-default">
+		<!-- 查询页面 -->
+		<action name="custCompanyList" class="custCompanyManagerAction"
+			method="list">
+			<result name="success" type="tiles">custCompanyList</result>
+		</action>
+		<!--查询事件 -->
+		<action name="custCompanySearch" class="custCompanyManagerAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+
+		<!--操作事件 -->
+		<action name="custCompanyCreate" class="custCompanyManagerAction"
+			method="create">
+			<result name="success">/WEB-INF/pages/customer/custCompanyEdit.jsp</result>
+<!-- 			<result name="success" type="tiles">custCompanyEdit</result> -->
+		</action>
+
+		<!--保存事件 -->
+		<action name="custCompanySave" class="custCompanyManagerAction"
+			method="saveOrUpdate">
+			<result name="success" type="tiles">custCompanyList</result>
+		</action>
+
+		<!--激活事件 -->
+		<action name="custActiveAccount" class="custCompanyManagerAction"
+			method="activeAccount">
+			<result name="ajax" type="json">
+				<param name="include">map</param>
+			</result>
+		</action>
+
+		<!--获得省市信息 -->
+		<action name="custGetAreasInfo" class="custCompanyManagerAction"
+			method="getAreasInfo">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="existsInCustInfo" class="custCompanyManagerAction" method="existsInCustInfo">
+			<result name="ajax" type="json">
+				<param name="include">map</param>
+			</result>
+		</action>
+		<action name="existsInBlackList" class="custCompanyManagerAction" method="existsInBlackList">
+			<result name="ajax" type="json">
+				<param name="include">map</param>
+			</result>
+		</action>
+	</package>
+	<!-- custcompany management action end -->
+	<package name="custPersonal" namespace="/custPersonal" extends="web-default">
+		<!-- 查询页面 -->
+		<action name="custPersonalList" class="custPersonalManagerAction"
+			method="list">
+			<result name="success" type="tiles">custPersonalList</result>
+		</action>
+		<!--查询事件 -->
+		<action name="custPersonalSearch" class="custPersonalManagerAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+
+		<!--明细 -->
+		<action name="custPersonalCreate" class="custPersonalManagerAction"
+			method="create">
+			<result name="success">/WEB-INF/pages/customer/custPersonalEdit.jsp</result>
+		</action>
+		<!--激活事件 -->
+		<action name="activePersonalAccount" class="custPersonalManagerAction"
+			method="activePersonalAccount">
+			<result name="ajax" type="json">
+				<param name="include">map</param>
+			</result>
+		</action>
+
+	</package>
+	<!-- corMertRate action Shangzhuzi 2016年12月12日15:55:13 start -->
+	<package name="corMertRate" namespace="/corMertRate" extends="web-default">
+		<!-- 查询页面 -->
+		<action name="corMertRateList" class="corMertRateManagerAction"
+			method="list">
+			<result name="success" type="tiles">corMertRateList</result>
+		</action>
+		<!--查询事件 -->
+		<action name="corMertRateSearch" class="corMertRateManagerAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+
+		<!--操作事件 -->
+		<action name="corMertRateCreate" class="corMertRateManagerAction"
+			method="create">
+			<result name="success">/WEB-INF/pages/customer/corMertRateEdit.jsp
+			</result>
+		</action>
+		<action name="rateGetMerchantName" class="corMertRateManagerAction" method="getMerchantName">
+			<result name="ajax" type="json">
+				<param name="include">map</param>
+			</result>
+		</action>
+		<action name="existsInFeeRateInfo" class="corMertRateManagerAction"	method="existsInFeeRateInfo">
+			<result name="ajax" type="json">
+				<param name="include">map</param>
+			</result>
+		</action>
+
+		<!--保存事件 -->
+		<action name="corMertRateSave" class="corMertRateManagerAction"
+			method="saveOrUpdate">
+			<result name="success" type="tiles">corMertRateList</result>
+		</action>
+
+	</package>
+	<!-- corMertRate action Shangzhuzi 2016年12月12日15:55:13 end -->
+	
+	<!-- incomeOrderManagerAction action Shangzhuzi 2016年12月12日15:55:13 start -->
+	<package name="incomeOrder" namespace="/incomeOrder" extends="web-default">
+		<!-- 查询页面  /custInOrder -->
+		<action name="incomeOrderList" class="incomeOrderManagerAction"
+			method="list">
+			<result name="success" type="tiles">custInOrderList</result>
+		</action>
+		<!--查询事件 -->
+		<action name="incomeOrderSearch" class="incomeOrderManagerAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+		<!--操作事件 -->
+		<action name="incomeOrderCreate" class="incomeOrderManagerAction"
+			method="create">
+			<result name="success">/WEB-INF/pages/customer/custInOrderEdit.jsp
+			</result>
+		</action>
+		<!-- 获取商户相关信息 -->
+		<action name="getMerchantDatoInfo" class="incomeOrderManagerAction" method="getMerchantDatoInfo">
+			<result name="ajax" type="json">
+				<param name="include">map</param>
+			</result>
+		</action>
+		<!--保存事件 -->
+		<action name="incomeOrderSave" class="incomeOrderManagerAction" method="saveOrUpdate">
+			<result name="success" type="tiles">custInOrderList</result>
+		</action>
+
+	</package>
+	<!-- incomeOrderManagerAction action Shangzhuzi 2016年12月12日15:55:13 end -->
+
+	<package name="corMertUser" namespace="/corMertUser" extends="web-default">
+		<action name="corMertUserList" class="corMertUserManagementAction"
+			method="list">
+			<result name="success" type="tiles">corMertUserList</result>
+		</action>
+
+		<action name="corMertUserSearch" class="corMertUserManagementAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+		<action name="corMertUserSelect" class="corMertUserManagementAction"
+			method="create">
+			<result name="success">/WEB-INF/pages/customer/corMertUserInfo.jsp
+			</result>
+		</action>
+
+		<action name="sendUserPwdEmail" class="corMertUserManagementAction"
+			method="sendUserPwdEmail">
+			<result name="success" type="redirect">corMertUserList.action</result>
+		</action>
+
+	</package>
+
+
+	<package name="merchantManagementChg" namespace="/merchantManagementChg" extends="web-default">
+	<action name="merchantManagementChg" class="merchantManagementChgAction"
+			method="list">
+			<result name="success" type="tiles">merchantInfo</result>
+		</action>
+		
+		<action name="merchantChgSearch" class="merchantManagementChgAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+		
+		<action name="merchantInfoChgAdd" class="merchantManagementChgAction"
+			method="create">
+			<result name="success">/WEB-INF/pages/customer/merchantChg.jsp
+			</result>
+		</action>
+		<action name="getProvince" class="merchantManagementChgAction"
+			method="getProvince">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="getCity" class="merchantManagementChgAction" method="getCity">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="getBankName" class="merchantManagementChgAction"
+			method="getBankName">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+
+		<action name="getBankBranchName" class="merchantManagementChgAction"
+			method="getBankBranchName">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+		<action name="saveOrUpdateMerchant" class="merchantManagementChgAction"
+			method="saveOrUpdate">
+<!-- 			<result name="ajax" type="json"> -->
+<!-- 				<param name="include">map</param> -->
+<!-- 			</result> -->
+			<result name="success" type="tiles">merchantInfo</result>
+<!-- 			<result name="success" type="redirect">merchantManagementChg.action</result> -->
+		</action>
+		<action name="delMert" class="merchantManagementChgAction"
+			method="delete">
+			<result name="ajax" type="jsonmessage">
+				<param name="message">message</param>
+			</result>
+		</action>
+	
+</package>
+</struts>

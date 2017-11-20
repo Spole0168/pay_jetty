@@ -1,0 +1,86 @@
+<?xml version="1.0" standalone="yes"?>
+
+<project name="CoreWeb" default="package-war-dev" basedir=".">
+	
+	<property name="build.home" value="${basedir}/../Build" />	
+	<property file="${build.home}/build.properties" />
+	<import file="${build.home}/build-common.xml" />
+	<import file="${build.home}/build.xml" />
+	<property name="coreweb.webcontent.dir" value="${basedir}/WebContent" />
+	
+	<macrodef name="package-war">
+		<attribute name="etcdir" />
+		<sequential>
+			<copy todir="${src.build.dir}" >
+				<fileset dir="@{etcdir}">
+					<include name="*.xml" />
+					<include name="*.properties" />
+				</fileset>					
+			</copy>			
+			<copy todir="${src.build.dir}" >
+				<fileset dir="${common.project.src.resources.dir}">
+					<include name="*.xml" />
+					<include name="*.properties" />
+				</fileset>					
+			</copy>			
+			<copy todir="${src.build.dir}/" >
+				<fileset dir="${certsmgr.project}/src/main/resources">
+					<include name="custCert.properties" />
+				</fileset>
+			</copy>
+
+			<war warfile="${build.dir}/${coreweb.application.name}.war" webxml="${coreweb.webcontent.dir}/WEB-INF/web.xml">
+				<fileset dir="${coreweb.webcontent.dir}" />
+				
+				<webinf dir="${coreweb.webcontent.dir}/WEB-INF">
+					<exclude name="classes/**" />
+					<exclude name="lib/**" />
+					<exclude name="web.xml" />
+				</webinf>
+			
+				<lib file="${lib.dir}/ibs/web/*.jar"/>
+				<lib file="${lib.dir}/ibs/protocol/ibs-core-certs-protocol.jar"/>
+
+				<classes dir="${src.build.dir}" />
+			</war>
+		</sequential>
+	</macrodef>
+	
+	<target name="package-war-dev" depends="compile" description="Package core web war for dev">
+		<sequential>
+			<package-war etcdir="${etc.dev.dir}"/>
+		</sequential>
+	</target>
+
+	<target name="package-war-qa" depends="compile" description="Package core web war for qa">
+		<sequential>
+			<package-war etcdir="${etc.qa.dir}"/>
+		</sequential>
+	</target>	
+	
+	<target name="package-war-qa2" depends="compile" description="Package core web war for test02">
+		<sequential>
+			<package-war etcdir="${etc.qa2.dir}"/>
+		</sequential>
+	</target>
+	
+	<target name="package-war-pt" depends="compile" description="Package core web war for pt">
+		<sequential>
+			<package-war etcdir="${etc.pt.dir}"/>
+		</sequential>
+	</target>
+	
+	<target name="package-war-stage" depends="compile" description="Package core web war for stage">
+		<sequential>
+			<package-war etcdir="${etc.stage.dir}"/>
+		</sequential>
+	</target>	
+
+	
+	<target name="package-war-production" depends="compile" description="Package core web war for production">
+		<sequential>
+			<package-war etcdir="${etc.prod.dir}"/>
+		</sequential>
+	</target>
+	
+</project>	

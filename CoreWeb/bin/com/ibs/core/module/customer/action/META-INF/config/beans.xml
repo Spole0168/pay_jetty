@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+	default-autowire="byName">
+
+	<!-- Merchant management beans start -->
+	<!-- Action -->
+	<bean id="merchantManagementAction"
+		class="com.ibs.core.module.customer.action.MerchantManagementAction"
+		scope="prototype">
+		<property name="merchantBiz" ref="merchantBiz" />
+		<property name="custBiz" ref="custBiz" />
+		<property name="corMertBankAcntBiz" ref="corMertBankAcntBiz" />
+		<property name="merchantChgBiz" ref="merchantChgBiz" />
+	</bean>
+
+	<!-- Action -->
+	<bean id="custCompanyManagerAction"
+		class="com.ibs.core.module.customer.action.CustCompanyManagerAction"
+		scope="prototype">
+	</bean>
+	<bean id="custPersonalManagerAction"
+		class="com.ibs.core.module.customer.action.CustPersonalManagerAction"
+		scope="prototype">
+	</bean>
+	<!-- Action -->
+	<bean id="corMertRateManagerAction"
+		class="com.ibs.core.module.customer.action.CorMertRateManagerAction"
+		scope="prototype">
+	</bean>
+	<bean id="incomeOrderManagerAction"
+		class="com.ibs.core.module.customer.action.IncomeOrderManagerAction"
+		scope="prototype">
+	</bean>
+
+	<bean id="corMertUserManagementAction"
+		class="com.ibs.core.module.customer.action.CorMertUserManagementAction"
+		scope="prototype">
+		<property name="corMertUserBiz" ref="corMertUserBiz" />
+		<property name="merchantBiz" ref="merchantBiz" />
+	</bean>
+	<bean id="merchantManagementChgAction"
+		class="com.ibs.core.module.customer.action.MerchantManagementChgAction"
+		scope="prototype">
+		<property name="merchantChgBiz" ref="merchantChgBiz" />
+		<property name="merchantBiz" ref="merchantBiz" />
+		<property name="corMertBankAcntChgBiz" ref="corMertBankAcntChgBiz" />
+		<property name="custBiz" ref="custBiz" />
+	</bean>
+</beans>

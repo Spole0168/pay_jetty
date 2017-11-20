@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:jaxws="http://cxf.apache.org/jaxws" 
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+			http://cxf.apache.org/jaxws 
+			http://cxf.apache.org/schemas/jaxws.xsd">
+			
+	<!-- 跟平台和部署相关，便于根据不同平台替换的,只能放跟平台和部署相关的bean -->
+	<bean id="mappingAutowiring" class="com.ibs.common.MappingAutowiring">
+		<property name="mappingResources" value="com/ibs/core/module/customer/META-INF/config/mapping.xml" />
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@9.123.200.45:1521:paycool"/>
+		<property name="username" value="core"/>
+		<property name="password" value="core"/>		
+	</bean>
+	
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="lobHandler" ref="lobHandler"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+				org.hibernate.dialect.Oracle10gDialect
+				<!-- org.hibernate.dialect.OracleDerbyDialect -->	
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- <prop key="hibernate.generate_statistics">true</prop> -->
+				<prop key="hibernate.connection.release_mode">
+					auto
+				</prop>
+				<prop key="hibernate.autoReconnect">true</prop>
+				<!-- 
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				-->
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>  
+				<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.EhCacheProvider
+				</prop>
+				<prop key="hibernate.cache.use_query_cache">false</prop>
+				
+			</props>
+		</property>
+	</bean>
+
+	<bean id="localTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="lobHandler" lazy-init="true" class="org.springframework.jdbc.support.lob.OracleLobHandler">
+        <property name="nativeJdbcExtractor">
+            <ref bean="nativeJdbcExtractor"/>
+        </property>
+	</bean>
+	
+	<bean id="nativeJdbcExtractor" lazy-init="true" class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor"/>
+    
+</beans>

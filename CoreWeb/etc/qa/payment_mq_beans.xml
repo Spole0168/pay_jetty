@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jms="http://www.springframework.org/schema/jms"	
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd"
+	default-autowire="byName">
+
+	<!-- MQ settings -->
+	
+	<bean id="gatewayNotifier" class="com.ibs.common.module.mq.sender.impl.MQSenderImpl">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="destination" value="${mq.queue.gateway.inorder.response}" />
+	</bean>
+	
+	<bean id="fundchannelNotifier" class="com.ibs.common.module.mq.sender.impl.MQSenderImpl">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="destination" value="${mq.queue.payment.inorder.request}" />
+	</bean>
+	
+	
+	<bean id="paymentOnGatewayMQListener" class="com.ibs.core.module.payment.listener.PaymentOnGatewayMQListener">
+		<property name="paymentService" ref="paymentService"/>
+		<property name="gatewayNotifier" ref="gatewayNotifier" />
+		<property name="corPaymentService" ref="corPaymentService" />
+		<property name="fundchannelNotifier" ref="fundchannelNotifier" />
+	</bean>
+	
+	<bean id="paymentOnFundChannelListener" class="com.ibs.core.module.payment.listener.PaymentOnFundChannelListener">
+		<property name="paymentService" ref="paymentService"/>
+		<property name="gatewayNotifier" ref="gatewayNotifier" />
+		<property name="corPaymentService" ref="corPaymentService" />
+	</bean>
+	
+
+	<bean id="mqConnectionFactory" class="com.ibm.mq.jms.MQQueueConnectionFactory">
+		<property name="hostName" value="${mq.hostName}" />
+		<property name="port" value="${mq.port}" />
+		<property name="queueManager" value="${mq.queueManager}" />
+		<property name="transportType" value="1" />
+		<property name="CCSID" value="${mq.CCSID}" />
+		<property name="channel" value="${mq.channel}" />
+	</bean>
+
+	<bean id="jmsConnectionFactory"
+		class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter">
+		<property name="targetConnectionFactory" ref="mqConnectionFactory" />
+		<property name="username" value="${mq.username}" />
+		<property name="password" value="${mq.password}" />
+	</bean>
+
+	<bean id="jmsTransactionManager"
+		class="org.springframework.jms.connection.JmsTransactionManager">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="pubSubDomain" value="false" />
+	</bean>
+<!-- 监听队列配置 -->
+	<jms:listener-container connection-factory="jmsConnectionFactory"
+		transaction-manager="jmsTransactionManager">
+		<jms:listener destination="${mq.queue.gateway.inorder.request}" ref="paymentOnGatewayMQListener" method="onMessage" />
+		<jms:listener destination="${mq.queue.payment.inorder.response}" ref="paymentOnFundChannelListener" method="onMessage" />
+	</jms:listener-container> 
+	
+</beans>

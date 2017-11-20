@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ibs.core.module.basefunc.domain" >
+ 	<!-- 审核信息表 -->
+    <class name="Audit" table="T_COR_AUDIT" lazy="true">
+        <id name="id" column="ID" type="java.lang.String">
+            <generator class="uuid.hex"/>
+        </id>
+		<property name="auditType" column="AUDIT_TYPE" type="java.lang.String" not-null="true" length="50"/>
+		<property name="sourceCode" column="SOURCE_CODE" type="java.lang.String" not-null="true" length="50"/>
+		<property name="status" column="STATUS" type="java.lang.String" not-null="false" length="50"/>
+		<property name="auditReason" column="AUDIT_REASON" type="java.lang.String" not-null="false" length="1000"/>
+		<property name="creator" column="CREATOR" type="java.lang.String" not-null="true" length="100"/>
+		<property name="createTime" column="CREATE_TIME" type="java.sql.Timestamp" not-null="true" length="11"/>
+		<property name="auditReasonCategory" column="AUDIT_REASON_CATEGORY" type="java.lang.String" not-null="false" length="20"/>
+    </class>
+    
+ 	<!-- 审核日志表-->
+    <class name="AuditLog" table="T_COR_AUDIT_LOG" lazy="true">
+        <id name="id" column="ID" type="java.lang.String">
+            <generator class="uuid.hex"/>
+        </id>
+		<property name="auditType" column="AUDIT_TYPE" type="java.lang.String" not-null="true" length="50"/>
+		<property name="sourceCode" column="SOURCE_CODE" type="java.lang.String" not-null="true" length="50"/>
+		<property name="status" column="STATUS" type="java.lang.String" not-null="false" length="50"/>
+		<property name="auditReason" column="AUDIT_REASON" type="java.lang.String" not-null="false" length="1000"/>
+		<property name="creator" column="CREATOR" type="java.lang.String" not-null="true" length="100"/>
+		<property name="createTime" column="CREATE_TIME" type="java.sql.Timestamp" not-null="true" length="11"/>
+    </class>
+    
+	<!-- 城市信息表    -->
+	<class name="City" table="T_COR_CITY" lazy="true">
+        <id name="id" column="ID" type="java.lang.String">
+            <generator class="uuid.hex"/>
+        </id>
+		<property name="countryCode" column="COUNTRY_CODE" type="java.lang.String" not-null="false" length="50"/>
+		<property name="countryName" column="COUNTRY_NAME" type="java.lang.String" not-null="false" length="100"/>
+		<property name="provinceCode" column="PROVINCE_CODE" type="java.lang.String" not-null="false" length="50"/>
+		<property name="provinceName" column="PROVINCE_NAME" type="java.lang.String" not-null="false" length="100"/>
+		<property name="cityCode" column="CITY_CODE" type="java.lang.String" not-null="false" length="50"/>
+		<property name="cityName" column="CITY_NAME" type="java.lang.String" not-null="false" length="100"/>
+		<property name="creator" column="CREATOR" type="java.lang.String" not-null="false" length="100"/>
+		<property name="createTime" column="CREATE_TIME" type="java.util.Date" not-null="false" length="11"/>
+		<property name="updator" column="UPDATOR" type="java.lang.String" not-null="false" length="100"/>
+		<property name="updateTime" column="UPDATE_TIME" type="java.util.Date" not-null="false" length="11"/>
+		<property name="isValid" column="IS_VALID" type="java.lang.String" not-null="false" length="2"/>
+    </class>
+    
+    <!-- 编码规则表 -->
+    <class name="CodeRule" table="T_COR_CODE_RULE" lazy="true">
+    	<id name="id" column="ID" type="java.lang.String">
+    		<generator class="uuid.hex"/>
+    	</id>
+    	<property name="codeType" column="CODE_TYPE" type="java.lang.String" not-null="true" length="50"/>
+    	<property name="prefix" column="PREFIX" type="java.lang.String" not-null="false" length="20"/>
+    	<property name="isTimeMark" column="IS_TIME_MARK" type="java.lang.String" not-null="false" length="2"/>
+    	<property name="suffixLength" column="SUFFIX_LENGTH" type="java.lang.Integer" not-null="false" length="22"/>
+    	<property name="suffixCurrentValue" column="SUFFIX_CURRENT_VALUE" type="java.lang.String" not-null="false" length="50"/>
+    	<property name="currentValue" column="CURRENT_VALUE" type="java.lang.String" not-null="false" length="50"/>
+    	<property name="status" column="STATUS" type="java.lang.String" not-null="true" length="2"/>
+    	<property name="creator" column="CREATOR" type="java.lang.String" not-null="true" length="100"/>
+    	<property name="createTime" column="CREATE_TIME" type="java.util.Date" not-null="true" length="11"/>
+    	<property name="updator" column="UPDATOR" type="java.lang.String" not-null="false" length="100"/>
+    	<property name="updateTime" column="UPDATE_TIME" type="java.util.Date" not-null="false" length="11"/>
+    	<property name="isValid" column="IS_VALID" type="java.lang.String" not-null="true" length="2"/>
+    </class>
+</hibernate-mapping>
+

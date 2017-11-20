@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="src" path="etc/local"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
+	<classpathentry kind="lib" path="/Library/share/commons-beanutils-1.8.0.jar" sourcepath="CoreWeb/C:/Users/IBM_ADMIN/Desktop/ibs.src/commons-beanutils-1.8.0源码+jar包/commons-beanutils-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="/Library/share/hibernate3.jar"/>
+	<classpathentry kind="lib" path="/Library/share/spring.jar"/>
+	<classpathentry kind="lib" path="/Library/share/mail-1.4.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="/Library/dubbo/dubbo-2.5.3.jar"/>
+	<classpathentry kind="lib" path="/Library/dubbo/javassist-3.15.0-GA.jar"/>
+	<classpathentry kind="lib" path="/Library/dubbo/netty.jar"/>
+	<classpathentry kind="lib" path="/Library/dubbo/zkclient-0.1-dev.jar"/>
+	<classpathentry kind="lib" path="/Library/dubbo/zookeeper-3.3.6.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-dbcp-1.3.jar"/>
+	<classpathentry kind="lib" path="/Library/share/commons-pool-1.5.5.jar"/>
+	<classpathentry kind="lib" path="/Library/share/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="/Library/share/asm.jar"/>
+	<classpathentry kind="lib" path="/Library/share/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="/Library/share/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="/Library/share/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/Library/test/junit-4.8.2.jar"/>
+	<classpathentry kind="lib" path="/Library/test/spring-test-2.5.6.jar"/>
+	<classpathentry kind="lib" path="/Library/share/slf4j-api-1.7.5.jar"/>
+	<classpathentry kind="lib" path="/Library/share/slf4j-log4j12-1.7.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

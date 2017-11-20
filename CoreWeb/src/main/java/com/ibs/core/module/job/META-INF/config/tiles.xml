@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>  
+<!-- 定时 - 列表 -->
+	<definition name="schedulerSetList" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/pblscheduler/schedulerSetList.jsp" />
+	</definition> 
+	
+	 <!-- 定时 - 修改 -->
+	<definition name="schedulerSetEdit" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/pblscheduler/schedulerSetEdit.jsp" />
+	</definition>
+	
+	<definition name="schedulerSettingLogList" extends="default">
+		<put-attribute name="contant"
+			value="/WEB-INF/pages/pblscheduler/schedulerLogList.jsp"/>
+		 
+	</definition>
+</tiles-definitions>

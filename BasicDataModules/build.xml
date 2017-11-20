@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<project name="BasicDataModules" default="package-web-jar" basedir=".">
+	
+	<property name="build.home" value="${basedir}/../Build" />	
+	<property file="${build.home}/build.properties" />
+	<import file="${build.home}/build-common.xml" />
+	<property name="web.jar.name" value="ibs-core-basicdata.jar" />
+	<property name="protocol.jar.name" value="ibs-core-basicdata-protocol.jar" />
+	<property name="service.jar.name" value="ibs-core-basicdata-service.jar" />
+
+	<target name="package-web-jar" depends="compile, jar-web" description="Package the basic data web jar">
+	</target>
+
+	<target name="package-protocol-jar" depends="compile, jar-protocol" description="Package the basic data protocol jar">
+	</target>
+
+	<target name="package-service-jar-local" depends="compile" description="Package the basic data service jar for local">
+		<jar-service mainclass="com.ibs.core.module.basicdata.BasicDataServiceProvider" etcdir="${etc.local.dir}" />
+	</target>
+	
+	<target name="package-service-jar-dev" depends="compile" description="Package the basic data service jar for dev">
+		<jar-service mainclass="com.ibs.core.module.basicdata.BasicDataServiceProvider" etcdir="${etc.dev.dir}" />
+	</target>
+
+	<target name="package-service-jar-qa" depends="compile" description="Package the basic data service jar for qa">
+		<jar-service mainclass="com.ibs.core.module.basicdata.BasicDataServiceProvider" etcdir="${etc.qa.dir}" />
+	</target>
+	
+	<target name="package-service-jar-qa2" depends="compile" description="Package the account service jar for qa2">
+		<jar-service mainclass="com.ibs.core.module.basicdata.BasicDataServiceProvider" etcdir="${etc.qa2.dir}" />
+	</target>
+
+	<target name="package-service-jar-pt" depends="compile" description="Package the account service jar for pt">
+		<jar-service mainclass="com.ibs.core.module.basicdata.BasicDataServiceProvider" etcdir="${etc.pt.dir}" />
+	</target>
+	
+	<target name="package-service-jar-stage" depends="compile" description="Package the account service jar for stage">
+		<jar-service mainclass="com.ibs.core.module.basicdata.BasicDataServiceProvider" etcdir="${etc.stage.dir}" />
+	</target>
+
+	<target name="package-service-jar-production" depends="compile" description="Package the basic data service jar for production">
+		<jar-service mainclass="com.ibs.core.module.basicdata.BasicDataServiceProvider" etcdir="${etc.production.dir}" />
+	</target>
+
+</project>

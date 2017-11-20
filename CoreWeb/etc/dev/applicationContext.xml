@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- Merchant Clearing JOB -->
+	<bean name="quartzScheduler" lazy-init="false" autowire="no"
+		class="com.ibs.common.module.frameworkimpl.scheduler.factory.InitSchedulerFactoryBean"
+		destroy-method="destroy">
+
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="configLocation" value="classpath:quartz.properties" />
+		<property name="group" value="IBSJobGroup" />
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		<property name="schedulerSettingDao">
+			<ref bean="schedulerSettingDao" />
+		</property>
+		<property name="jobDetails">
+			<list>
+				<ref bean="merchantClearingJob" />
+				<ref bean="preMerchantClearingJob" />
+				<ref bean="reconJob" />
+			</list>
+		</property>
+	</bean>
+	
+</beans>

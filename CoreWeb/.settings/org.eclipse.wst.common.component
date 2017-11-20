@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="CoreWeb">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/etc/dev"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <dependent-module archiveName="WebFramework.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/WebFramework/WebFramework">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SSO.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SSO/SSO">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="zkclient-0.1-dev.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Library/dubbo/zkclient-0.1-dev.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="netty.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Library/dubbo/netty.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="dubbo-2.5.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Library/dubbo/dubbo-2.5.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="zookeeper-3.3.6.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/Library/dubbo/zookeeper-3.3.6.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/CoreWeb/build/classes"/>
+        <property name="context-root" value="CoreWeb"/>
+    </wb-module>
+</project-modules>

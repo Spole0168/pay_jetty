@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="pblscheduler-framework-default" namespace="/pblscheduler"
+		extends="tiles-default">
+		<!-- 列表,不做权限校验 -->
+		<action name="schedulerSetList" class="schedulerSetAction"
+			method="list">
+			<result name="success" type="tiles">schedulerSetList</result>
+		</action>
+	</package>
+
+	<package name="pblscheduler-web-default" namespace="/pblscheduler"
+		extends="web-default">
+		<!-- 定时任务参数设置 -->
+
+		<!-- 修改 -->
+		<action name="schedulerSetModify" class="schedulerSetAction"
+			method="modify">
+			<result name="success" type="tiles">schedulerSetEdit
+			</result>
+		</action>
+		<action name="schedulerSetCheck" class="schedulerSetAction"
+			method="check">
+			<result name="error" type="jsonexception"></result>
+			<result name="ajax" type="jsonmessage">
+				<param name="message">returnMsg</param>
+			</result>
+		</action>
+		
+		<!-- 查找 -->
+		<action name="schedulerSetSearch" class="schedulerSetAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+		<!-- 更新 -->
+		<action name="schedulerSetSaveOrUpdate" class="schedulerSetAction"
+			method="saveOrUpdate">
+			<result name="success" type="redirect">
+				/pblscheduler/schedulerSetList.action
+			</result>
+		</action>
+		<!-- 开启定时器 -->
+		<action name="schedulerSetStart" class="schedulerSetAction"
+			method="start">
+			<result name="success" type="redirect">
+				schedulerSetList.action
+			</result>
+			<!-- <result name="ajax" type="json"> <param name="include">result</param> 
+				</result> -->
+		</action>
+		<!-- 停止定时器 -->
+		<action name="schedulerSetStop" class="schedulerSetAction"
+			method="stop">
+			<result name="success" type="redirect">
+				schedulerSetList.action?blocked=${blocked}
+			</result>
+			<!-- <result name="ajax" type="json"> <param name="include">result</param> 
+				</result> -->
+		</action>
+
+		<!-- 定时器日志列表 -->
+		<action name="schedulerSettingLogList" class="schedulerSettingLogAction"
+			method="list">
+			<!-- <result name="success" type="tiles">schedulerSettingLogList </result> -->
+			<result>/WEB-INF/pages/pblscheduler/schedulerLogList.jsp</result>
+		</action>
+		<!-- 定时器日志查询 -->
+		<action name="schedulerSettingLogSearch" class="schedulerSettingLogAction"
+			method="search">
+			<result name="ajax" type="json">
+				<param name="include">result</param>
+			</result>
+		</action>
+	</package>
+</struts>
+		
+		
+		
+	
+			
